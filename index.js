@@ -15,12 +15,22 @@ client.connect(err => {
 
 
 	const appointmentCollection = client.db("doctors-portal").collection("appointment");
+	const doctorCollection = client.db("doctors-portal").collection("doctors");
 	//Create
 	app.post('/addAppointment', (req, res) => {
 		const appointment = req.body;
 		appointmentCollection.insertOne(appointment)
 			.then(result => {
 				res.send(result.insertedCount > 0)
+			})
+	})
+	//Create
+	app.post('/addDoctor', (req, res) => {
+		const doctor = req.body;
+		doctorCollection.insertOne(doctor)
+			.then(result => {
+				console.log("data added succesfully", result);
+				res.redirect('/')
 			})
 	})
 	//Read
@@ -33,8 +43,8 @@ client.connect(err => {
 	//Post
 	app.post('/appointmentsByDate', (req, res) => {
 		const date = req.body;
-		appointmentCollection.find({date: date.date})
-			.toArray((err, documents) =>{
+		appointmentCollection.find({ date: date.date })
+			.toArray((err, documents) => {
 				res.send(documents)
 			})
 	})
