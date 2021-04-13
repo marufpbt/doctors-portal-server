@@ -16,14 +16,14 @@ client.connect(err => {
 
 	const appointmentCollection = client.db("doctors-portal").collection("appointment");
 	//Create
-	// app.post('/addProduct', (req, res) => {
-	// 	const product = req.body;
-	// 	productCollection.insertOne(product)
-	// 		.then(result => {
-	// 			console.log("data added succesfully");
-	// 			res.redirect('/')
-	// 		})
-	// })
+	app.post('/addAppointment', (req, res) => {
+		const appointment = req.body;
+		productCollection.insertOne(appointment)
+			.then(result => {
+				console.log("data added succesfully");
+				res.redirect('/')
+			})
+	})
 	//Read
 	app.get('/appointments', (req, res) => {
 		appointmentCollection.find({})
