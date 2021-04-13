@@ -50,10 +50,19 @@ client.connect(err => {
 	//Post
 	app.post('/appointmentsByDate', (req, res) => {
 		const date = req.body;
-		appointmentCollection.find({ date: date.date })
-			.toArray((err, documents) => {
-				res.send(documents)
+		const email = req.body.email;
+		doctorCollection.find({ date: date.date })
+			.toArray((err, doctors) => {
+				const filter = { date: date.date }
+				if(doctors.length === 0) {
+					filter.email = email;
+				}
+				appointmentCollection.find(filter)
+				.toArray((err, documents) => {
+					res.send(documents)
+				})
 			})
+
 	})
 	//Read
 	// app.get('/product/:id', (req, res) => {
