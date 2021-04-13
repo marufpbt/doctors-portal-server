@@ -30,6 +30,14 @@ client.connect(err => {
 				res.send(documents);
 			})
 	})
+	//Post
+	app.post('/appointmentsByDate', (req, res) => {
+		const date = req.body;
+		appointmentCollection.find({date: date.date})
+			.toArray((err, documents) =>{
+				res.send(documents)
+			})
+	})
 	//Read
 	// app.get('/product/:id', (req, res) => {
 	// 	appointmentCollection.find({ _id: ObjectId(req.params.id) })
