@@ -23,8 +23,8 @@ app.get('/', (req, res) => {
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
-    const appointmentCollection = client.db("doctorsPortal").collection("appointments");
-    const doctorCollection = client.db("doctorsPortal").collection("doctors");
+    const appointmentCollection = client.db("doctors-portal").collection("appointment");
+    const doctorCollection = client.db("doctors-portal").collection("doctors");
 
     app.post('/addAppointment', (req, res) => {
         const appointment = req.body;
