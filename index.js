@@ -18,7 +18,7 @@ client.connect(err => {
 	//Create
 	app.post('/addAppointment', (req, res) => {
 		const appointment = req.body;
-		productCollection.insertOne(appointment)
+		appointmentCollection.insertOne(appointment)
 			.then(result => {
 				console.log("data added succesfully");
 				res.redirect('/')
