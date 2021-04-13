@@ -20,8 +20,7 @@ client.connect(err => {
 		const appointment = req.body;
 		appointmentCollection.insertOne(appointment)
 			.then(result => {
-				console.log("data added succesfully");
-				res.redirect('/')
+				res.send(result.insertedCount > 0)
 			})
 	})
 	//Read
