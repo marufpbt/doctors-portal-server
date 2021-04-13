@@ -51,16 +51,25 @@ client.connect(err => {
 	app.post('/appointmentsByDate', (req, res) => {
 		const date = req.body;
 		const email = req.body.email;
-		doctorCollection.find({ date: date.date })
+		doctorCollection.find({ email: email })
 			.toArray((err, doctors) => {
 				const filter = { date: date.date }
-				if(doctors.length === 0) {
+				if (doctors.length === 0) {
 					filter.email = email;
 				}
 				appointmentCollection.find(filter)
-				.toArray((err, documents) => {
-					res.send(documents)
-				})
+					.toArray((err, documents) => {
+						res.send(documents)
+					})
+			})
+
+	})
+	//Post
+	app.post('/isDoctor', (req, res) => {
+		const email = req.body.email;
+		doctorCollection.find({ email: email})
+			.toArray((err, doctors) => {
+				res.send(doctors.length > 0)
 			})
 
 	})
