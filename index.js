@@ -40,6 +40,13 @@ client.connect(err => {
 				res.send(documents);
 			})
 	})
+	//Read
+	app.get('/doctors', (req, res) => {
+		doctorCollection.find({})
+			.toArray((err, documents) => {
+				res.send(documents);
+			})
+	})
 	//Post
 	app.post('/appointmentsByDate', (req, res) => {
 		const date = req.body;
